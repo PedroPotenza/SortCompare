@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <time.h>
+#include <sys/time.h>
 #include <conio.h>
 
 #define true 1;
@@ -97,7 +97,8 @@ void showVetor(int* vetor, int size){
 
 void selectionSort(int* vetor, int size){
 
-    clock_t start = clock();
+    struct timeval start;
+    gettimeofday(&start, NULL);
     printf("Ordenando...\n");
 
     long int numberComparisons = 0;
@@ -107,9 +108,9 @@ void selectionSort(int* vetor, int size){
         int indexLower = i;
         for (int j = i+1; j < size; j++)
         {
+            numberComparisons++; 
             if(vetor[j] < vetor[indexLower]){ 
                 indexLower = j;
-                numberComparisons++; 
             }
         }
         int aux = vetor[i];
@@ -117,14 +118,22 @@ void selectionSort(int* vetor, int size){
         vetor[indexLower] = aux;
     }
     
-    clock_t end = clock();
+    struct timeval end;
+    gettimeofday(&end, NULL);
 
-    double time_spend = (double)(end - start) / CLOCKS_PER_SEC;
+    long seconds, nseconds;
+    float time_spent;
+
+    seconds  = end.tv_sec  - start.tv_sec;
+    nseconds = end.tv_usec - start.tv_usec;
+
+    time_spent = (seconds + nseconds)/1000000.0;
+
     printf("======= SELECTION SORT ======= \n");
     printf("Tamanho do vetor: %d\n", size);
     printf("Como ele estava preenchido? ");
     FlagPrinter();
-    printf("\nTempo gasto: %f\n", time_spend);
+    printf("\nTempo gasto: %f\n", time_spent);
     printf("Numero de comparacoes: %ld\n", numberComparisons);
 
     flag = BEST_CASE;

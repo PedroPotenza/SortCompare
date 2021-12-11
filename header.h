@@ -15,7 +15,7 @@
 #include "sorts/insertionSort.c"
 #include "sorts/quickSort.c"
 #include "sorts/mergeSort.c"
-// #include "sorts/heapSort.c"
+#include "sorts/heapSort.c"
 
 typedef enum {
 

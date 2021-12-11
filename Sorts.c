@@ -56,7 +56,7 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
                 strcpy(name,"QUICK");
                 break;
             case 9:
-                // time_spend_interation = heapSort(vetor, size, &numberComparisons);
+                time_spend_interation = heapSort(vetor, size, &numberComparisons);
                 strcpy(name,"HEAP");
                 break;
 

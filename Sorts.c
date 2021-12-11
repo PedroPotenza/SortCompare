@@ -5,7 +5,7 @@ FlagCase flag = NA;
 
 void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
-    clearScreen();
+    //clearScreen();
     printf("\nRepita %d vezes com qual caso inicial?\n", countSort);
     printf("(1) - Crescente (melhor caso)\n");
     printf("(2) - Decrescente (pior caso)\n");
@@ -43,7 +43,7 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
                 break;
 
             case 6: 
-                // time_spend_interation = insertionSort(vetor, size, &numberComparisons);
+                time_spend_interation = insertionSort(vetor, size, &numberComparisons);
                 strcpy(name,"INSERTION");
                 break;
 
@@ -114,47 +114,47 @@ int main(void){
             break;
 
         case -1:
-            clearScreen();
+           // clearScreen();
             printf("Quantas vezes cada algoritmo deve ser feito?\n");
             scanf("%d", &countSorts);
-            clearScreen();
+            //clearScreen();
             break;
 
         case 1:
             bestCase(vetor, size);
                 printf("Concluido - Preenchimento Crescente\n");
                 flag = BEST_CASE;
-            pressAnything();
-            clearScreen();
+           // pressAnything();
+            //clearScreen();
             break;
 
         case 2:
             worstCase(vetor, size);
                 printf("Concluido - Preenchimento Decrescente\n");
                 flag = WORST_CASE;
-            pressAnything();
-            clearScreen();
+           // pressAnything();
+            //clearScreen();
             break;
 
         case 3:
             randomCase(vetor, size);
                 printf("Concluido - Preenchimento Random\n");
                 flag = RANDOM_CASE;
-            pressAnything();
-            clearScreen();
+            //pressAnything();
+            //clearScreen();
 
             break;
 
         case 4:
             showVetor(vetor, size);
-            pressAnything();
-            clearScreen();
+            //pressAnything();
+            //clearScreen();
             break;
 
         case 5: case 6: case 7: case 8: case 9:
             SortRepeatMenu(vetor, size, countSorts, option);
-            pressAnything();
-            clearScreen();
+            //pressAnything();
+            //clearScreen();
             break;
         
         default:

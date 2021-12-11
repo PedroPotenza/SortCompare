@@ -8,12 +8,11 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <sys/time.h>
-#include <conio.h>
 #include <string.h>
 #include <math.h>
 
 #include "sorts/selectionSort.c"
-// #include "sorts/insertionSort.c"
+#include "sorts/insertionSort.c"
 // #include "sorts/heapSort.c"
 // #include "sorts/mergeSort.c"
 // #include "sorts/quickSort.c"

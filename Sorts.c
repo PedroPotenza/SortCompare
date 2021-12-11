@@ -53,7 +53,7 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
                 break;
 
             case 8: 
-                // time_spend_interation = quickSort(vetor, size, &numberComparisons);
+                time_spend_interation = quickSort(vetor, 0, size-1, &numberComparisons);
                 strcpy(name,"QUICK");
                 break;
 

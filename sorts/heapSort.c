@@ -1,29 +1,15 @@
 #include "../header.h"
 
 // O(nlogn) Sorting: Heap Sort
-long heapSort(int* vetor, int size, long long* numberComparisons) {
-	max(vetor, size, numberComparisons);
-	int i = size - 1;
-	do {
-		int aux = vetor[0];
-		vetor[0] = vetor[i];
-		vetor[i] = aux;
-
-		maxHeapify(vetor, 0, --size, numberComparisons);
-		(*numberComparisons)++;
-	} while(--i >= 0);
+int left(int i) {
+	return 2 * i + 1;
 }
 
-void max(int* vetor, int size, long long* numberComparisons) {
-	int i = size / 2;
-	do
-  	{
-		maxHeapify(vetor, i, size, numberComparisons);
-    (*numberComparisons)++;
-	} while(--i >= 0); //first i = i - 1 is done and then i >= 0 afterwards.
+int right(int i) {
+	return 2 * i + 2;
 }
 
-void maxHeapify(int* vetor, int i, int size, long long* numberComparisons) {
+void maxHeapify(int* vetor, int i, int size, unsigned long long* numberComparisons) {
 	int r = right(i);
 	int l = left(i);
 	int max = i;
@@ -46,10 +32,35 @@ void maxHeapify(int* vetor, int i, int size, long long* numberComparisons) {
 	}
 }
 
-int left(int i) {
-	return 2 * i + 1;
+void max(int* vetor, int size, unsigned long long* numberComparisons) {
+	int i = size / 2;
+	do
+  	{
+		maxHeapify(vetor, i, size, numberComparisons);
+    (*numberComparisons)++;
+	} while(--i >= 0); //first i = i - 1 is done and then i >= 0 afterwards.
 }
 
-int right(int i) {
-	return 2 * i + 2;
+long heapSort(int* vetor, int size, unsigned long long* numberComparisons) {
+
+	struct timeval start;
+    gettimeofday(&start, NULL);
+    printf("Ordenando...\n\n");
+
+	max(vetor, size, numberComparisons);
+	int i = size - 1;
+	do {
+		int aux = vetor[0];
+		vetor[0] = vetor[i];
+		vetor[i] = aux;
+
+		maxHeapify(vetor, 0, --size, numberComparisons);
+		(*numberComparisons)++;
+	} while(--i >= 0);
+
+	struct timeval end;
+    gettimeofday(&end, NULL);
+
+    long time_spent = ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec));
+    return time_spent;
 }

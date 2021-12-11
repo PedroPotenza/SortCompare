@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <sys/time.h>
 #include <string.h>
+#include <conio.h>
 #include <math.h>
 
 #include "sorts/selectionSort.c"
@@ -27,20 +28,24 @@ typedef enum {
 }FlagCase;
 
 //Sorts
-long selectionSort(int* vetor, int size, long long* numberComparisons);
+long selectionSort(int* vetor, int size, unsigned long long* numberComparisons);
 
-// void insertionSort(int* vetor, int size);
+long insertionSort(int* vetor, int size, unsigned long long* numberComparisons);
 
-// void quickSort(int* vetor, int size);
+long quickSort(int* vetor, int low, int high, unsigned long long* numberComparisons);
+void swap(int* a, int* b);
+int partition(int* vetor, int low, int high, unsigned long long* numberComparisons);
+void quickSortRaw(int* vetor, int low, int high, unsigned long long* numberComparisons);
 
-// long mergeSort(int* vetor, int size, long long* numberComparisons);
-// void merge(int* vetor, int p, int q, int r, long long* numberComparisons);
+long mergeSort(int* vetor, int size, unsigned long long* numberComparisons);
+void mergeSortRaw(int* vetor, int p, int r, unsigned long long* numberComparisons);
+void merge(int* vetor, int p, int q, int r, unsigned long long* numberComparisons);
 
-// void heapSort(int* vetor, int size);
-// void max(int* vetor, int size);
-// void maxHeapify(int* vetor, int i, int size);
-// int left(int i);
-// int right(int i);
+long heapSort(int* vetor, int size, unsigned long long* numberComparisons);
+void max(int* vetor, int size, unsigned long long* numberComparisons);
+void maxHeapify(int* vetor, int i, int size, unsigned long long* numberComparisons);
+int left(int i);
+int right(int i);
 
 //Utils
 void showMenu(int countSorts);

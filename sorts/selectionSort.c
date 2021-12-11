@@ -1,7 +1,7 @@
 #include "../header.h" 
 
 // O(n^2) Sorting: Selection sort
-long selectionSort(int* vetor, int size, long long* numberComparisons){
+long selectionSort(int* vetor, int size, unsigned long long* numberComparisons){
     
     // COMECO DE CADA SORT
     struct timeval start;

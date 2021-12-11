@@ -7,7 +7,7 @@ void swap(int* a, int* b) {
 }
 
 // O(nlogn) Sorting: Quick Sort RAW
-int partition(int* vetor, int low, int high, long long* numberComparisons) {
+int partition(int* vetor, int low, int high, unsigned long long* numberComparisons) {
 	int pivot = vetor[high]; //pivot
 	int i = low - 1, j;
 	
@@ -23,7 +23,7 @@ int partition(int* vetor, int low, int high, long long* numberComparisons) {
 	return (i + 1);
 }
 
-void quickSortRaw(int* vetor, int low, int high, long long* numberComparisons) { // called initially with quickSort(vetor, 0, tam_v - 1);
+void quickSortRaw(int* vetor, int low, int high, unsigned long long* numberComparisons) { // called initially with quickSort(vetor, 0, tam_v - 1);
 	if(low < high) {
 		(*numberComparisons) ++;
 
@@ -35,7 +35,7 @@ void quickSortRaw(int* vetor, int low, int high, long long* numberComparisons) {
 	}
 }
 
-long quickSort(int* vetor, int low, int high, long long* numberComparisons) {
+long quickSort(int* vetor, int low, int high, unsigned long long* numberComparisons) {
 	struct timeval start;
     gettimeofday(&start, NULL);
     printf("Ordenando...\n\n");

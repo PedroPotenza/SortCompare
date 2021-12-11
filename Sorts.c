@@ -16,7 +16,7 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
     char name[15];
     long time_spent = 0, time_spend_interation;
-    long long numberComparisons = 0;
+    unsigned long long numberComparisons = 0;
 
     for (int i = 0; i < countSort; i++)
     {
@@ -112,47 +112,47 @@ int main(void){
             break;
 
         case -1:
-           // clearScreen();
+            clearScreen();
             printf("Quantas vezes cada algoritmo deve ser feito?\n");
             scanf("%d", &countSorts);
-            //clearScreen();
+            clearScreen();
             break;
 
         case 1:
             bestCase(vetor, size);
                 printf("Concluido - Preenchimento Crescente\n");
                 flag = BEST_CASE;
-           // pressAnything();
-            //clearScreen();
+            pressAnything();
+            clearScreen();
             break;
 
         case 2:
             worstCase(vetor, size);
                 printf("Concluido - Preenchimento Decrescente\n");
                 flag = WORST_CASE;
-           // pressAnything();
-            //clearScreen();
+            pressAnything();
+            clearScreen();
             break;
 
         case 3:
             randomCase(vetor, size);
                 printf("Concluido - Preenchimento Random\n");
                 flag = RANDOM_CASE;
-            //pressAnything();
-            //clearScreen();
+            pressAnything();
+            clearScreen();
 
             break;
 
         case 4:
             showVetor(vetor, size);
-            //pressAnything();
-            //clearScreen();
+            pressAnything();
+            clearScreen();
             break;
 
         case 5: case 6: case 7: case 8: case 9:
             SortRepeatMenu(vetor, size, countSorts, option);
-            //pressAnything();
-            //clearScreen();
+            pressAnything();
+            clearScreen();
             break;
         
         default:

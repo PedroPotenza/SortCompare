@@ -1,36 +1,7 @@
 #include "../header.h"
 
 // O(nlogn) Sorting: Merge Sort
-
-long mergeSort(int* vetor, int size, long long* numberComparisons){
-  // COMECO DE CADA SORT
-  struct timeval start;
-  gettimeofday(&start, NULL);
-  printf("Ordenando...\n\n");
-  // ==========================
-
-  mergeSortRaw(vetor, 0, size-1, numberComparisons);
-
-  // FINAL DE CADA SORT
-  struct timeval end;
-  gettimeofday(&end, NULL);
-
-  long time_spent = ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec));
-  return time_spent; // sim, todo sort ao final precisa retornar um long com o tempo de execucao
-  // ==========================================
-}
-
-void mergeSortRaw(int* vetor, int p, int r, long long* numberComparisons) {
-	if(p < r) {
-    (*numberComparisons)++; // ATENCAO ATENCAO CADA COMPARACAO METE O CONTADOR
-		int q = (p + r) / 2;
-		mergeSortRaw(vetor, p, q, numberComparisons);
-		mergeSortRaw(vetor, q + 1, r, numberComparisons);
-		merge(vetor, p, q, r, numberComparisons);
-	}
-}
-
-void merge(int* vetor, int p, int q, int r, long long* numberComparisons) {
+void merge(int* vetor, int p, int q, int r, unsigned long long* numberComparisons) {
 	int i, j, k;
 	int nL = q - p + 1;
 	int nR = r - q;
@@ -66,4 +37,32 @@ void merge(int* vetor, int p, int q, int r, long long* numberComparisons) {
 
 	free(L);
 	free(R);
+}
+
+void mergeSortRaw(int* vetor, int p, int r, unsigned long long* numberComparisons) {
+	if(p < r) {
+    (*numberComparisons)++;
+		int q = (p + r) / 2;
+		mergeSortRaw(vetor, p, q, numberComparisons);
+		mergeSortRaw(vetor, q + 1, r, numberComparisons);
+		merge(vetor, p, q, r, numberComparisons);
+	}
+}
+
+long mergeSort(int* vetor, int size, unsigned long long* numberComparisons){
+  // COMECO DE CADA SORT
+  struct timeval start;
+  gettimeofday(&start, NULL);
+  printf("Ordenando...\n\n");
+  // ==========================
+
+  mergeSortRaw(vetor, 0, size-1, numberComparisons);
+
+  // FINAL DE CADA SORT
+  struct timeval end;
+  gettimeofday(&end, NULL);
+
+  long time_spent = ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec));
+  return time_spent; // sim, todo sort ao final precisa retornar um long com o tempo de execucao
+  // ==========================================
 }

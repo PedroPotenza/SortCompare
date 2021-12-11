@@ -1,7 +1,7 @@
 #include "../header.h" 
 
 // O(n^2) Sorting: Insertion Sort RAW
-long insertionSort(int* vetor, int size, long long* numberComparisons) {
+long insertionSort(int* vetor, int size, unsigned long long* numberComparisons) {
 	
 	struct timeval start;
     gettimeofday(&start, NULL);

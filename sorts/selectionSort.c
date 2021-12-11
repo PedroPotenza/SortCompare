@@ -28,7 +28,7 @@ long selectionSort(int* vetor, int size, long long* numberComparisons){
     struct timeval end;
     gettimeofday(&end, NULL);
 
-    long time_spent = ((end.tv_sec * 1000000 + end.tv_usec) -(start.tv_sec * 1000000 + start.tv_usec));
+    long time_spent = ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec));
     return time_spent; // sim, todo sort ao final precisa retornar um long com o tempo de execucao
     // ==========================================
 

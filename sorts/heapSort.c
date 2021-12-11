@@ -14,12 +14,13 @@ void heapSort(int* vetor, int size) {
 void max(int* vetor, int size) {
 	int i = size/2;
 	do
-  {
+  	{
 		maxHeapify(vetor, i, size);
 	} while(--i  >= 0); //first i = i - 1 is doen and then i >= 0 afterwards.
 }
 
 void maxHeapify(int* vetor, int i, int size) {
+	
 	int r = right(i);
 	int l = left(i);
 	int max = i;

@@ -1,115 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <sys/time.h>
-#include <conio.h>
-
-#include "sorts/insertionSort.h"
-#include "sorts/selectionSort.h"
-#include "sorts/heapSort.h"
-#include "sorts/mergeSort.h"
-#include "sorts/quickSort.h"
-
-#define true 1;
-#define false 0;
-
-typedef enum {
-
-    NA = 0,
-    BEST_CASE,
-    WORST_CASE,
-    RANDOM_CASE
-}FlagCase;
+#include "header.h"
+#include "util.c"
 
 FlagCase flag = NA;
 
-void clearScreen(){
-
-    system("@cls||clear");
-}
-
-void pressAnything(){
-
-    printf("\nPressione qualquer coisa...");
-    getch();
-}
-
-void FlagPrinter(){
-
-    switch (flag)
-    {
-    case NA:
-        printf("NULL");
-        break;
-    
-    case BEST_CASE:
-        printf("Best Case");
-        break;
-    
-    case WORST_CASE:
-        printf("Worst Case");
-        break;
-    
-    case RANDOM_CASE:
-        printf("Random Case");
-        break;
-    
-    }    
-
-}
-
-int trueRand(){
-
-    int value;
-    value = (rand() % 32000);
-    if(value % 2 != 0)
-    {
-        int value2 = (rand() % 32000);
-        if(value % 2 != 0){
-            int value3 = (rand() % 32000);
-            return value2*value3;
-        } else {
-            value2;
-        }
-    } else {
-        return value;
-    }
-}
-
-void bestCase(int* vetor, int size){
-
-    for(int i = 0; i < size; i++)
-    {
-        vetor[i] = i+1;
-    }
-
-}
-
-void worstCase(int* vetor, int size){
-
-    for (int i = 0; i < size; i++)
-    {
-        vetor[i] = size - i;
-    }
-
-}
-
-void randomCase(int* vetor, int size){
-
-    for(int i = 0; i < size; i++)
-    {
-        vetor[i] = trueRand();
-    }
-    
-}
-
-void showVetor(int* vetor, int size){
-    for (int i = 0; i < size; i++){
-        printf("vetor[%d] = %d\n", i, vetor[i]);
-    }
-}
-
-void selectionSortRepeatMenu(int* vetor, int size, int countSort){
+void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
     clearScreen();
     printf("\nRepita %d vezes com qual caso inicial?\n", countSort);
@@ -120,39 +14,72 @@ void selectionSortRepeatMenu(int* vetor, int size, int countSort){
     int option;
     scanf("%d", &option);
 
+    char name[15];
     long time_spent = 0, time_spend_interation;
-    long numberComparisons = 0;
+    long long numberComparisons = 0;
 
     for (int i = 0; i < countSort; i++)
     {
         if(option == 1){
             bestCase(vetor, size);
-            time_spend_interation = selectionSort(vetor, size, &numberComparisons);
             flag = BEST_CASE;
         }
 
         if(option == 2){
             worstCase(vetor, size);
-            time_spend_interation = selectionSort(vetor, size, &numberComparisons);
             flag = WORST_CASE;
         }
 
         if(option == 3){
             randomCase(vetor, size);
-            time_spend_interation = selectionSort(vetor, size, &numberComparisons);
             flag = RANDOM_CASE;
         }
 
+        switch(SortChosen){
+
+            case 5: 
+                time_spend_interation = selectionSort(vetor, size, &numberComparisons);
+                strcpy(name,"SELECTION");
+                break;
+
+            case 6: 
+                // time_spend_interation = insertionSort(vetor, size, &numberComparisons);
+                strcpy(name,"INSERTION");
+                break;
+
+            case 7: 
+                // time_spend_interation = mergeSort(vetor, size, &numberComparisons);
+                strcpy(name,"MERGE");
+                break;
+
+            case 8: 
+                // time_spend_interation = quickSort(vetor, size, &numberComparisons);
+                strcpy(name,"QUICK");
+                break;
+
+            case 9: 
+                // time_spend_interation = heapSort(vetor, size, &numberComparisons);
+                strcpy(name,"HEAP");
+                break;
+
+        }
+ 
         time_spent += time_spend_interation;
+
     }
     
-    printf("======= SELECTION SORT ======= \n");
+    //Nao faco ideia de como calcular o desvio padrao desse role... provavelmente vamo ter q colocar um vetor do tipo long e salvar o tempo de cada iteracao nele, pra assim conseguir fazer o calculo (o calculo do desvio padrao exige a média do tempo por isso to falando q vamos precisar salvar a informacao de cada interacao... normalmente ela ta sendo descartada apos a soma no tempo total)
+
+    // formula do desvio padrao https://www.todamateria.com.br/desvio-padrao/#:~:text=O%20desvio%20padrão%20é%20uma,mais%20homogêneo%20são%20os%20dados.
+
+    printf("======= %s SORT ======= \n", name);
     printf("Quantas vezes o sort foi feito? %d\n", countSort);
     printf("Tamanho do vetor: %d\n", size);
     printf("Como ele estava sendo preenchido? ");
-    FlagPrinter();
-    printf("\nTempo gasto:  %lf\n", (time_spent/countSort)/1000000.0);
-    printf("Numero de comparacoes: %ld\n", numberComparisons/countSort);
+    FlagPrinter(flag);
+    printf("\nTempo gasto na ultima iteracao:  %lf\n", time_spend_interation/1000000.0);
+    printf("Media do Tempo gasto:  %lf\n", (time_spent/countSort)/1000000.0);
+    printf("Media do Numero de comparacoes: %lld\n", numberComparisons/countSort);
 
     flag = BEST_CASE;   
 
@@ -169,26 +96,12 @@ int main(void){
     scanf("%d", &size);
 
     vetor = malloc(size*sizeof(int));
-    
+
     int sair = false;
     while(!sair){
 
-        printf("\nComo preencher o vetor?\n");
-        printf("(1) - Crescente (melhor caso)\n");
-        printf("(2) - Decrescente (pior caso)\n");
-        printf("(3) - Aleatorio\n");
-
-        printf("\nFuncoes Uteis:\n");
-        printf("(4) - Imprimir vetor\n");
-
-        printf("\nLoop Sorts:\n");
-        printf("Atualmente cada Sort eh feito %d vezes.\n", countSorts);
-        printf("(5) - Select Sort\n");
-
-        printf("(-1) - Mudar a quantidade de vezes\n");
-        printf("(0) - Sair\n");
+        showMenu(countSorts);
         
-
         int option;
         printf("\nOpcao: ");
         scanf("%d", &option);
@@ -238,8 +151,8 @@ int main(void){
             clearScreen();
             break;
 
-        case 5:
-            selectionSortRepeatMenu(vetor, size, countSorts);
+        case 5: case 6: case 7: case 8: case 9:
+            SortRepeatMenu(vetor, size, countSorts, option);
             pressAnything();
             clearScreen();
             break;

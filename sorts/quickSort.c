@@ -1,35 +1,37 @@
 #include "../header.h" 
 
-#define swap(t, x, y) { t z = x; x = y; y = z; }
+void swap(int* a, int* b) { 
+    int t = *a; 
+    *a = *b; 
+    *b = t; 
+}
 
 // O(nlogn) Sorting: Quick Sort RAW
 int partition(int* vetor, int low, int high, long long* numberComparisons) {
-	int x = vetor[high]; //pivot
+	int pivot = vetor[high]; //pivot
 	int i = low - 1, j;
 	
 	for (j = low; j < high ; j++) {
-		if(vetor[j] <= x) {
-			i = i + 1;
-			swap(int, vetor[i], vetor[j]);
+		if(vetor[j] < pivot) {
+			(*numberComparisons) ++;
+			i++;
+			swap(&vetor[i], &vetor[j]);
 		}
 	}
-	i = i + 1;
-
-	swap(int, vetor[i], vetor[high]);
+	swap(&vetor[i + 1], &vetor[high]);
 	
-	return i;
+	return (i + 1);
 }
 
 void quickSortRaw(int* vetor, int low, int high, long long* numberComparisons) { // called initially with quickSort(vetor, 0, tam_v - 1);
 	if(low < high) {
 		(*numberComparisons) ++;
 
-		int t = (rand() % ( high - low + 1) + low);
-		swap(int, vetor[t], vetor[high]);
+		int pi = partition(vetor, low, high, numberComparisons);
 
-		int q = partition(vetor, low, high, &numberComparisons);
-		quickSort(vetor, low, q - 1, &numberComparisons);
-		quickSort(vetor, low + 1, high, &numberComparisons);
+		int q = partition(vetor, low, high, numberComparisons);
+		quickSortRaw(vetor, low, pi - 1, numberComparisons); 
+        quickSortRaw(vetor, pi + 1, high, numberComparisons);
 	}
 }
 
@@ -38,7 +40,7 @@ long quickSort(int* vetor, int low, int high, long long* numberComparisons) {
     gettimeofday(&start, NULL);
     printf("Ordenando...\n\n");
 
-	quickSortRaw(vetor, low, high, &numberComparisons);
+	quickSortRaw(vetor, low, high, numberComparisons);
 
 	struct timeval end;
     gettimeofday(&end, NULL);

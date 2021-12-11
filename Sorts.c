@@ -37,37 +37,35 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
         switch(SortChosen){
 
-            case 5: 
+            case 5:
                 time_spend_interation = selectionSort(vetor, size, &numberComparisons);
                 strcpy(name,"SELECTION");
                 break;
 
-            case 6: 
+            case 6:
                 time_spend_interation = insertionSort(vetor, size, &numberComparisons);
                 strcpy(name,"INSERTION");
                 break;
 
-            case 7: 
-                // time_spend_interation = mergeSort(vetor, size, &numberComparisons);
+            case 7:
+                time_spend_interation = mergeSort(vetor, size, &numberComparisons);
                 strcpy(name,"MERGE");
                 break;
-
-            case 8: 
+            case 8:
                 time_spend_interation = quickSort(vetor, 0, size-1, &numberComparisons);
                 strcpy(name,"QUICK");
                 break;
-
-            case 9: 
+            case 9:
                 // time_spend_interation = heapSort(vetor, size, &numberComparisons);
                 strcpy(name,"HEAP");
                 break;
 
         }
- 
+
         time_spent += time_spend_interation;
 
     }
-    
+
     //Nao faco ideia de como calcular o desvio padrao desse role... provavelmente vamo ter q colocar um vetor do tipo long e salvar o tempo de cada iteracao nele, pra assim conseguir fazer o calculo (o calculo do desvio padrao exige a média do tempo por isso to falando q vamos precisar salvar a informacao de cada interacao... normalmente ela ta sendo descartada apos a soma no tempo total)
 
     // formula do desvio padrao https://www.todamateria.com.br/desvio-padrao/#:~:text=O%20desvio%20padrão%20é%20uma,mais%20homogêneo%20são%20os%20dados.

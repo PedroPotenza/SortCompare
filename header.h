@@ -13,9 +13,9 @@
 
 #include "sorts/selectionSort.c"
 #include "sorts/insertionSort.c"
-// #include "sorts/heapSort.c"
-// #include "sorts/mergeSort.c"
 #include "sorts/quickSort.c"
+#include "sorts/mergeSort.c"
+// #include "sorts/heapSort.c"
 
 typedef enum {
 
@@ -33,8 +33,8 @@ long selectionSort(int* vetor, int size, long long* numberComparisons);
 
 // void quickSort(int* vetor, int size);
 
-// void mergeSort(int* vetor, int size);
-// void merge(int* vetor, int p, int q, int r);
+// long mergeSort(int* vetor, int size, long long* numberComparisons);
+// void merge(int* vetor, int p, int q, int r, long long* numberComparisons);
 
 // void heapSort(int* vetor, int size);
 // void max(int* vetor, int size);
@@ -52,4 +52,4 @@ void randomCase(int* vetor, int size);
 void showVetor(int* vetor, int size);
 void FlagPrinter();
 
-#endif 
+#endif

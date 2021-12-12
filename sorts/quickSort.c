@@ -1,39 +1,47 @@
 #include "../header.h" 
 
-void swap(int* a, int* b) { 
+void swap(int* a, int* b) 
+{ 
     int t = *a; 
     *a = *b; 
     *b = t; 
-}
+} 
 
 // O(nlogn) Sorting: Quick Sort RAW
-int partition(int* vetor, int low, int high, unsigned long long* numberComparisons) {
-	int pivot = vetor[high]; //pivot
-	int i = low - 1, j;
-	
-	for (j = low; j < high ; j++) {
-		if(vetor[j] < pivot) {
-			(*numberComparisons) ++;
-			i++;
-			swap(&vetor[i], &vetor[j]);
-		}
-	}
-	swap(&vetor[i + 1], &vetor[high]);
-	
-	return (i + 1);
-}
+int partition (int arr[], int low, int high, unsigned long long* numberComparisons) 
+{ 
+    int pivot = arr[high]; // pivot 
+    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+  
+    for (int j = low; j <= high - 1; j++) 
+    { 
+        // If current element is smaller than the pivot 
+        if (arr[j] < pivot) 
+        {
+			(*numberComparisons) ++; 
+            i++; // increment index of smaller element 
+            swap(&arr[i], &arr[j]); 
+        } 
+    } 
+    swap(&arr[i + 1], &arr[high]); 
+    return (i + 1); 
+} 
 
-void quickSortRaw(int* vetor, int low, int high, unsigned long long* numberComparisons) { // called initially with quickSort(vetor, 0, tam_v - 1);
-	if(low < high) {
-		(*numberComparisons) ++;
-
-		int pi = partition(vetor, low, high, numberComparisons);
-
-		int q = partition(vetor, low, high, numberComparisons);
-		quickSortRaw(vetor, low, pi - 1, numberComparisons); 
-        quickSortRaw(vetor, pi + 1, high, numberComparisons);
-	}
-}
+void quickSortRaw(int arr[], int low, int high, unsigned long long* numberComparisons) 
+{ 
+    if (low < high) 
+    { 
+		(*numberComparisons) ++; 
+        /* pi is partitioning index, arr[p] is now 
+        at right place */
+        int pi = partition(arr, low, high, numberComparisons); 
+  
+        // Separately sort elements before 
+        // partition and after partition 
+        quickSortRaw(arr, low, pi - 1, numberComparisons); 
+        quickSortRaw(arr, pi + 1, high, numberComparisons); 
+    } 
+} 
 
 long quickSort(int* vetor, int low, int high, unsigned long long* numberComparisons) {
 	struct timeval start;

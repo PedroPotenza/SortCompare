@@ -18,6 +18,9 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
     long time_spent = 0, time_spend_interation;
     unsigned long long numberComparisons = 0;
 
+    long* vetorDesvioPadrao = NULL;
+    vetorDesvioPadrao = malloc(size*sizeof(int));
+
     for (int i = 0; i < countSort; i++)
     {
         if(option == 1){
@@ -62,21 +65,27 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
         }
 
-        time_spent += time_spend_interation;
+        printf("[ %d ] Tempo gasto:  %lf\n", i, time_spend_interation/1000000.0);
 
+        vetorDesvioPadrao[i] = time_spend_interation;
+
+        time_spent += time_spend_interation;
     }
 
-    //Nao faco ideia de como calcular o desvio padrao desse role... provavelmente vamo ter q colocar um vetor do tipo long e salvar o tempo de cada iteracao nele, pra assim conseguir fazer o calculo (o calculo do desvio padrao exige a média do tempo por isso to falando q vamos precisar salvar a informacao de cada interacao... normalmente ela ta sendo descartada apos a soma no tempo total)
+    double avarage_time = (time_spent/(countSort*1.0));
+    double desvioPadrao = 0.0;
 
-    // formula do desvio padrao https://www.todamateria.com.br/desvio-padrao/#:~:text=O%20desvio%20padrão%20é%20uma,mais%20homogêneo%20são%20os%20dados.
+    for (int i = 0; i < countSort; i++) {
+        desvioPadrao = desvioPadrao + pow(vetorDesvioPadrao[i] - avarage_time, 2);
+    }
 
     printf("======= %s SORT ======= \n", name);
     printf("Quantas vezes o sort foi feito? %d\n", countSort);
     printf("Tamanho do vetor: %d\n", size);
     printf("Como ele estava sendo preenchido? ");
     FlagPrinter(flag);
-    printf("\nTempo gasto na ultima iteracao:  %lf\n", time_spend_interation/1000000.0);
-    printf("Media do Tempo gasto:  %lf\n", (time_spent/countSort)/1000000.0);
+    printf("\nMedia do Tempo gasto:  %lf\n", avarage_time/1000000.0);
+    printf("Desvio padrao do tempo gasto:  %lf\n", sqrt(desvioPadrao/countSort) / 1000000.0);
     printf("Media do Numero de comparacoes: %lld\n", numberComparisons/countSort);
 
     flag = BEST_CASE;   

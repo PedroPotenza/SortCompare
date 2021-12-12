@@ -9,7 +9,7 @@
 #include <limits.h>
 #include <sys/time.h>
 #include <string.h>
-// #include <conio.h>
+#include <conio.h>
 #include <math.h>
 
 #include "sorts/selectionSort.c"

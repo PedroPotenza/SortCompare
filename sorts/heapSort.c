@@ -14,17 +14,18 @@ void maxHeapify(int* vetor, int i, int size, unsigned long long* numberCompariso
 	int l = left(i);
 	int max = i;
 
-	if(l < size && vetor[max] < vetor[l]) {
-    (*numberComparisons) += 2;
-	  max = l;
-  }
-	if(r < size && vetor[max] < vetor[r]) {
-	  (*numberComparisons) += 2;
-    max = r;
-  }
+	(*numberComparisons) += 2;
+	if(l < size && vetor[max] < vetor[l]) {	
+	 	max = l;
+ 	}
 
+	(*numberComparisons) += 2;
+	if(r < size && vetor[max] < vetor[r]) {
+    	max = r;
+ 	}
+
+	(*numberComparisons)++;
 	if(max != i) {
-    (*numberComparisons)++;
 		int aux = vetor[i];
 		vetor[i] = vetor[max];
 		vetor[max] = aux;
@@ -37,7 +38,8 @@ void max(int* vetor, int size, unsigned long long* numberComparisons) {
 	do
   	{
 		maxHeapify(vetor, i, size, numberComparisons);
-    (*numberComparisons)++;
+    
+		(*numberComparisons)++;
 	} while(--i >= 0); //first i = i - 1 is done and then i >= 0 afterwards.
 }
 

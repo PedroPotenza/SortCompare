@@ -11,14 +11,16 @@ void swap(int* a, int* b)
 int partition (int arr[], int low, int high, unsigned long long* numberComparisons) 
 { 
     int pivot = arr[high]; // pivot 
+    // int pivot = rand() % (high + 1 - low) + low; // pivot 
+    // int pivot  = arr[high/2];
     int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
   
     for (int j = low; j <= high - 1; j++) 
     { 
         // If current element is smaller than the pivot 
+        (*numberComparisons) ++;
         if (arr[j] < pivot) 
-        {
-			(*numberComparisons) ++; 
+        { 
             i++; // increment index of smaller element 
             swap(&arr[i], &arr[j]); 
         } 
@@ -29,9 +31,9 @@ int partition (int arr[], int low, int high, unsigned long long* numberCompariso
 
 void quickSortRaw(int arr[], int low, int high, unsigned long long* numberComparisons) 
 { 
+    (*numberComparisons) ++; 
     if (low < high) 
     { 
-		(*numberComparisons) ++; 
         /* pi is partitioning index, arr[p] is now 
         at right place */
         int pi = partition(arr, low, high, numberComparisons); 

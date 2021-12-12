@@ -28,11 +28,11 @@ void showMenu(int countSorts){
 void pressAnything(){
 
     printf("\nPressione qualquer coisa...");
-    // getch();
+    getch();
 }
 
 void clearScreen(){
-    // system("@cls||clear");
+    system("@cls||clear");
 }
 
 void bestCase(int* vetor, int size){

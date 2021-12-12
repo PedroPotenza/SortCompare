@@ -5,7 +5,7 @@ FlagCase flag = NA;
 
 void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 
-    //clearScreen();
+    clearScreen();
     printf("\nRepita %d vezes com qual caso inicial?\n", countSort);
     printf("(1) - Crescente (melhor caso)\n");
     printf("(2) - Decrescente (pior caso)\n");

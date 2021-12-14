@@ -18,30 +18,34 @@ void merge(int* vetor, int p, int q, int r, unsigned long long* numberComparison
 	i = j = 0;
 	k = p;
 
+	(*numberComparisons) += 1;
 	while (i < nL && j < nR) {
-    (*numberComparisons) += 2; //Duas comparacoes por rodada
-    (*numberComparisons)++;
-    if (L[i] <= R[j])  vetor[k++] = L[i++];
-		else  vetor[k++] = R[j++];
+    	 //Duas comparacoes por rodada
+		(*numberComparisons)++;
+		if (L[i] <= R[j])  vetor[k++] = L[i++];
+			else  vetor[k++] = R[j++];
+
+		(*numberComparisons) += 1;
 	}
 
+	
 	while (i < nL) {
-    (*numberComparisons)++;
-    vetor[k++] = L[i++];
-  }
+		(*numberComparisons)++;
+		vetor[k++] = L[i++];
+	}
 
 	while (j < nR) {
-	  (*numberComparisons)++;
-    vetor[k++] = R[j++];
-  }
+		(*numberComparisons)++;
+		vetor[k++] = R[j++];
+	}
 
 	free(L);
 	free(R);
 }
 
 void mergeSortRaw(int* vetor, int p, int r, unsigned long long* numberComparisons) {
+	(*numberComparisons)++;
 	if(p < r) {
-    (*numberComparisons)++;
 		int q = (p + r) / 2;
 		mergeSortRaw(vetor, p, q, numberComparisons);
 		mergeSortRaw(vetor, q + 1, r, numberComparisons);

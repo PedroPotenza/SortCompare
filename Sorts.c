@@ -95,7 +95,7 @@ void SortRepeatMenu(int* vetor, int size, int countSort, int SortChosen){
 int main(void){
 
     int size; 
-    int countSorts = 10;
+    int countSorts = 3;
     int* vetor = NULL;
     srand(time(NULL)); //every execute has a diferent seed, so rand is truly random ;) 
 
@@ -105,7 +105,7 @@ int main(void){
     vetor = malloc(size*sizeof(int));
 
     int sair = false;
-    while(!sair){
+    while(!sair){ 
 
         showMenu(countSorts);
         

@@ -14,12 +14,14 @@ long insertionSort(int* vetor, int size, unsigned long long* numberComparisons) 
 		aux = vetor[i];
 		j = i - 1;
 
-		while ((j >= 0) && (vetor[j] > aux)) {
-			(*numberComparisons) += 2; //Duas comparacoes por rodada
+		(*numberComparisons) += 1; //Duas comparacoes por rodada
 
+		while ((j >= 0) && (vetor[j] > aux)) {
+			
 			vetor[j + 1] = vetor[j];
 			j--;
-		}
+			(*numberComparisons) += 1;
+		}	
 		vetor[j + 1] = aux;
 	}
 
